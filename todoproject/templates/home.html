@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<style>
+    .banner-box{
+    width:100%;
+    background-color:grey;
+    box-sizing:border-box;
+    border-radius:10px;
+    margin-bottom:30px;
+    }
+    .banner-text{
+    font-size:14px;
+    margin:25px;
+    padding:20px;
+    box-sizing:border-box;
+    color:white;
+    }
+    .form-control{
+    margin-bottom:25px;
+    }
+    .form-group{
+    padding:3px;
+    }
+    .form-btns{
+    text-decoration:none;
+    text-align:center;
+    color:white;
+    background-color:grey;
+    }
+    .form-btns:hover{
+    background-color:#646363;
+    }
+    p{
+    margin-bottom:0px;
+    }
+    .form-box{
+    margin:5px;
+    padding:1%;
+    border-radius:10px
+    }
+    .form-btnx{
+    text-align:center;
+    width:60%;
+    margin:auto;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner-box">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-box shadow" method="POST"class="form-group">
+                {% csrf_token %}
+                <input type="text"name="task"placeholder="task"class="form-control shadow">
+                <input type="text"name="priority"placeholder="priority"class="form-control shadow">
+                <input type="date"name="date"placeholder="date"class="form-control shadow">
+                <button type="submit"class="form-btns form-control shadow">Add</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            {% for i in task %}
+            <div class="form-box shadow">
+                <h6>{{ i.name }}</h6>
+                <p>{{ i.priority }}</p>
+                <p>{{ i.date }}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{% url 'delete' i.id %}" class="form-btns form-control form-btnx  shadow">Done</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'update' i.id %}" class="form-btns form-control form-btnx  shadow">Update</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

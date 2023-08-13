@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% block body %}
+<div class="row">
+         <div class="col-md-6">
+            {% for task1 in task %}
+            <div class="form-box shadow">
+                <h6>{{ task1.name }}</h6>
+                <p>{{ task1.priority }}</p>
+                <p>{{ task1.date }}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{% url 'delete' task1.id %}" class="form-btns form-control form-btnx  shadow">Done</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'update' task1.id %}" class="form-btns form-control form-btnx  shadow">Update</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
